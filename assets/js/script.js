@@ -10,3 +10,9 @@ function readTasksFromStorage() {
     }
     return tasks;
 }
+
+//Save the tasks to the local storage
+function saveTasksToLocalStorage(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
