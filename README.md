@@ -28,9 +28,9 @@ The following API's are required to be saved locally for offline use:
 
 ### JavaScript:
 - Bootstrap v1.5.3
--jQuery v3.4.1
--jQueryUI v1.13.1
--dayJS- v1.11.3
+- jQuery v3.4.1
+- jQueryUI v1.13.1
+- dayJS- v1.11.3
 
 ## Code Snippets
 Here are some key parts of the code:
