@@ -70,3 +70,25 @@ function createTaskCard(task) {
     return taskCard;
 }
 
+function printTaskData() {
+    const tasks = readTasksFromStorage();
+
+    const todoList = $('#todo-cards');
+    todoList.empty();
+
+    const inProgressList = $('#in-progress-cards');
+    inProgressList.empty();
+
+    const doneList = $('#done-cards');
+    doneList.empty();
+
+    for (let task of tasks) {
+        if (task.status === 'to-do') {
+            todoList.append(createTaskCard(task));
+        } else if (task.status === 'in-progress') {
+            inProgressList.append(createTaskCard(task));
+        } else if (task.status === 'done') {
+            doneList.append(createTaskCard(task));
+        }
+    }
+}
