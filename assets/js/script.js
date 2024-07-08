@@ -134,3 +134,18 @@ function handleTaskFormSubmit(event) {
 
     $('#formModal').modal('hide');
 }
+
+function handleDrop(event, ui) {
+    const tasks = readTasksFromStorage();
+    const taskId = ui.draggable[0].dataset.taskId;
+    const newStatus = event.target.id;
+
+    for (let task of tasks) {
+        if (task.id === taskId) {
+            task.status = newStatus;
+        }
+    }
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    printTaskData();
+}
