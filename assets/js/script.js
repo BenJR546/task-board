@@ -107,3 +107,30 @@ function handleDeleteTask() {
     printTaskData();
 }
 
+function handleTaskFormSubmit(event) {
+    event.preventDefault();
+
+    const taskName = $('#task-name').val().trim();
+    const taskDescription = $('#description').val().trim();
+    const taskDueDate = $('#due-date').val();
+//add crypto to generate unique UUID
+    const newTask = {
+        id: crypto.randomUUID(),
+        name: taskName,
+        description: taskDescription,
+        dueDate: taskDueDate,
+        status: 'to-do'
+    };
+
+    const tasks = readTasksFromStorage();
+    tasks.push(newTask);
+
+    saveTasksToLocalStorage(tasks);
+    printTaskData();
+
+    $('#task-name').val('');
+    $('#description').val('');
+    $('#due-date').val('');
+
+    $('#formModal').modal('hide');
+}
