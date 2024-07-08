@@ -92,3 +92,18 @@ function printTaskData() {
         }
     }
 }
+
+function handleDeleteTask() {
+    const taskId = $(this).attr('data-task-id');
+    const tasks = readTasksFromStorage();
+
+    tasks.forEach((task) => {
+        if (task.id === taskId) {
+            tasks.splice(tasks.indexOf(task), 1);
+        }
+    });
+
+    saveTasksToLocalStorage(tasks);
+    printTaskData();
+}
+
