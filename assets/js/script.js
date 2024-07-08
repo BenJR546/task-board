@@ -52,3 +52,21 @@ function createTaskCard(task) {
             taskCard.addClass('bg-success text-white');
         $('#formModal').modal('hide');
     }
+
+    cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
+    taskCard.append(cardHeader, cardBody);
+
+    
+    taskCard.draggable({
+        opacity: 0.7,
+        zIndex: 100,
+        helper: function () {
+            return $(this).clone().css({
+                width: $(this).outerWidth()
+            });
+        },
+    });
+
+    return taskCard;
+}
+
