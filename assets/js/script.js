@@ -149,3 +149,24 @@ function handleDrop(event, ui) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     printTaskData();
 }
+
+$('#task-form').on('submit', handleTaskFormSubmit);
+$('#task-lanes').on('click', '.btn-delete-task', handleDeleteTask);
+
+$(document).ready(function () {
+    printTaskData();
+
+    $('#due-date').datepicker({
+        changeMonth: true,
+        changeYear: true,
+    });
+
+    $('.lane').droppable({
+        accept: '.draggable',
+        drop: function(event, ui) {
+            $(this).find('.cardsLane').append(ui.draggable);
+            handleDrop(event, ui);
+        }
+    });
+});
+
