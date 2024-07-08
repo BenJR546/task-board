@@ -1,8 +1,8 @@
-//Open the modal
+
 $('#modal-button').on('click', function() {
     $('#formModal').modal('show');
 });
-//Read the tasks from the local storage and initialize the tasks array if there are none
+
 function readTasksFromStorage() {
     let tasks = JSON.parse(localStorage.getItem('tasks'));
     if (!tasks) {
@@ -11,12 +11,12 @@ function readTasksFromStorage() {
     return tasks;
 }
 
-//Save the tasks to the local storage
+
 function saveTasksToLocalStorage(tasks) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-// Create task card
+
 function createTaskCard(task) {
     const taskCard = $('<div>')
         .addClass('card task-card draggable my-3')
@@ -37,3 +37,18 @@ function createTaskCard(task) {
         .text('Delete')
         .attr("data-task-id", task.id);
     cardDeleteBtn.on('click', handleDeleteTask);
+
+    if (task.dueDate && task.status !== 'done') {
+        const now = dayjs();
+        const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
+
+        if (now.isSame(taskDueDate, 'day')) {
+            taskCard.addClass('bg-warning text-dark');
+        } else if (now.isAfter(taskDueDate, 'day')) {
+            taskCard.addClass('bg-danger text-white');
+            cardDeleteBtn.addClass('border-light');
+        }
+        } else if (task.status === 'done') {
+            taskCard.addClass('bg-success text-white');
+        $('#formModal').modal('hide');
+    }
