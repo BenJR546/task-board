@@ -1,7 +1,7 @@
-
 $('#modal-button').on('click', function() {
     $('#formModal').modal('show');
 });
+
 
 function readTasksFromStorage() {
     let tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -10,7 +10,6 @@ function readTasksFromStorage() {
     }
     return tasks;
 }
-
 
 function saveTasksToLocalStorage(tasks) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -56,7 +55,7 @@ function createTaskCard(task) {
     cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
     taskCard.append(cardHeader, cardBody);
 
-    
+
     taskCard.draggable({
         opacity: 0.7,
         zIndex: 100,
@@ -93,6 +92,7 @@ function printTaskData() {
     }
 }
 
+
 function handleDeleteTask() {
     const taskId = $(this).attr('data-task-id');
     const tasks = readTasksFromStorage();
@@ -113,7 +113,7 @@ function handleTaskFormSubmit(event) {
     const taskName = $('#task-name').val().trim();
     const taskDescription = $('#description').val().trim();
     const taskDueDate = $('#due-date').val();
-//add crypto to generate unique UUID
+
     const newTask = {
         id: crypto.randomUUID(),
         name: taskName,
@@ -150,6 +150,7 @@ function handleDrop(event, ui) {
     printTaskData();
 }
 
+// Event listeners
 $('#task-form').on('submit', handleTaskFormSubmit);
 $('#task-lanes').on('click', '.btn-delete-task', handleDeleteTask);
 
